@@ -8,11 +8,34 @@
   <link rel="stylesheet" href="stylephone.css" />
 </head>
 <body>
-  <main class="container">
-    <div class="loginScreen okno">
-      <div class="LOGO">CYBERPUNK</div>
+    <main class="container">
+      <div class="loginScreen okno">
+    <div class="LOGO">CYBERPUNK</div>
 
+    <label class="login" id="labelEmail" for="email">EMAIL</label>
+    <input class="login" id="email" type="email">
+
+    <label class="login hidden" id="labelNickname" for="nickname">NICK</label>
+    <input class="login hidden" id="nickname" type="text">
+
+    <label class="login" id="labelPassword" for="password">HASŁO</label>
+    <input class="login" id="password" type="password">
+
+    <div class="buttonsInRow nieRozdzielone">
+      <input type="checkbox" id="rememberPassword">
+      <label class="dlaChecka" for="rememberPassword">ZAPAMIĘTAJ</label>
     </div>
+
+    <div class="buttonsInRow">
+      <button class="login" id="logowanie">ZALOGUJ</button>
+      <button class="login" id="rejestracja">ZAREJESTRUJ</button>
+    </div>
+  </div>
+
+  <div class="okno menuGlowne hidden">
+    <div class="LOGO">CYBERPUNK</div>
+    <div id="whoLogged"><span id="displaynickname"></span></div>
+  </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

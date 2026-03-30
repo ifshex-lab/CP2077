@@ -1,161 +1,246 @@
-const SUPABASE_URL = "https://vpiueesmgkfyaywoplou.supabase.co";
-const SUPABASE_KEY = "sb_publishable_r5w2jn8PjgpKA55dXeNc2Q_2qgSWlpx";
+document.addEventListener("DOMContentLoaded", async () => {
+  const SUPABASE_URL = "https://vpiueesmgkfyaywoplou.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_r5w2jn8PjgpKA55dXeNc2Q_2qgSWlpx";
 
-const { createClient } = supabase;
-const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const displayNameInput = document.getElementById("displayName");
-const statusEl = document.getElementById("status");
+  const loginScreen = document.querySelector(".loginScreen");
+  const menuGlowne = document.querySelector(".menuGlowne");
 
-const registerBtn = document.getElementById("registerBtn");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const saveProfileBtn = document.getElementById("saveProfileBtn");
-const loadProfileBtn = document.getElementById("loadProfileBtn");
+  const emailInput = document.getElementById("email");
+  const nicknameInput = document.getElementById("nickname");
+  const passwordInput = document.getElementById("password");
 
-function setStatus(text) {
-  statusEl.textContent = text;
-}
+  const labelEmail = document.getElementById("labelEmail");
+  const labelNickname = document.getElementById("labelNickname");
+  const labelPassword = document.getElementById("labelPassword");
 
-async function ensureProfile(user) {
-  const { error } = await sb.from("profiles").upsert({
-    id: user.id,
-    email: user.email,
-    display_name: ""
+  const rememberCheckbox = document.getElementById("rememberPassword");
+  const btnLogin = document.getElementById("logowanie");
+  const btnRegister = document.getElementById("rejestracja");
+  const displaynickname = document.getElementById("displaynickname");
+
+  let authMode = "login";
+  let authBusy = false;
+
+  function pokazMenu(nick) {
+    displaynickname.textContent = nick || "";
+    loginScreen.classList.add("hidden");
+    menuGlowne.classList.remove("hidden");
+  }
+
+  function pokazLogowanie() {
+    displaynickname.textContent = "";
+    menuGlowne.classList.add("hidden");
+    loginScreen.classList.remove("hidden");
+  }
+
+  function ustawTrybLogowania() {
+    authMode = "login";
+
+    labelEmail.classList.remove("hidden");
+    emailInput.classList.remove("hidden");
+    labelPassword.classList.remove("hidden");
+    passwordInput.classList.remove("hidden");
+
+    labelNickname.classList.add("hidden");
+    nicknameInput.classList.add("hidden");
+
+    btnLogin.textContent = "ZALOGUJ";
+    btnRegister.textContent = "PRZEJDŹ DO REJESTRACJI";
+  }
+
+  function ustawTrybRejestracji() {
+    authMode = "register";
+
+    labelEmail.classList.remove("hidden");
+    emailInput.classList.remove("hidden");
+    labelPassword.classList.remove("hidden");
+    passwordInput.classList.remove("hidden");
+    labelNickname.classList.remove("hidden");
+    nicknameInput.classList.remove("hidden");
+
+    btnLogin.textContent = "UTWÓRZ KONTO";
+    btnRegister.textContent = "WRÓĆ DO LOGOWANIA";
+  }
+
+  function ustawPrzyciski(stan) {
+    btnLogin.disabled = stan;
+    btnRegister.disabled = stan;
+  }
+
+  function zapiszRemember(email) {
+    localStorage.setItem("rememberUser", rememberCheckbox.checked ? "true" : "false");
+
+    if (rememberCheckbox.checked) {
+      localStorage.setItem("savedEmail", email);
+    } else {
+      localStorage.removeItem("savedEmail");
+    }
+  }
+
+  async function pobierzNick(userId) {
+    const { data, error } = await sb
+      .from("profiles")
+      .select("nickname")
+      .eq("id", userId)
+      .single();
+
+    if (error) return "";
+    return data?.nickname || "";
+  }
+
+  async function zapiszProfil(userId, nickname) {
+    const { error } = await sb
+      .from("profiles")
+      .insert({
+        id: userId,
+        nickname: nickname
+      });
+
+    if (error) throw error;
+  }
+
+  async function zarejestruj() {
+    if (authBusy) return;
+    authBusy = true;
+    ustawPrzyciski(true);
+
+    try {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      const nickname = nicknameInput.value.trim();
+
+      if (!email || !password || !nickname) {
+        alert("Uzupełnij email, nick i hasło.");
+        return;
+      }
+
+      const { data, error } = await sb.auth.signUp({
+        email,
+        password
+      });
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      const user = data?.user;
+
+      if (!user) {
+        alert("Konto utworzone. Potwierdź email i zaloguj się.");
+        ustawTrybLogowania();
+        return;
+      }
+
+      await zapiszProfil(user.id, nickname);
+      zapiszRemember(email);
+      pokazMenu(nickname);
+    } catch (e) {
+      alert(e.message || "Błąd rejestracji");
+    } finally {
+      authBusy = false;
+      ustawPrzyciski(false);
+    }
+  }
+
+  async function zaloguj() {
+    if (authBusy) return;
+    authBusy = true;
+    ustawPrzyciski(true);
+
+    try {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (!email || !password) {
+        alert("Uzupełnij email i hasło.");
+        return;
+      }
+
+      const { data, error } = await sb.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      zapiszRemember(email);
+
+      const user = data?.user;
+      const nick = await pobierzNick(user.id);
+      pokazMenu(nick);
+    } catch (e) {
+      alert(e.message || "Błąd logowania");
+    } finally {
+      authBusy = false;
+      ustawPrzyciski(false);
+    }
+  }
+
+  btnLogin.addEventListener("click", async () => {
+    if (authMode === "login") {
+      await zaloguj();
+    } else {
+      await zarejestruj();
+    }
   });
 
-  if (error) {
-    console.error("ensureProfile error:", error.message);
-  }
-}
+  btnRegister.addEventListener("click", () => {
+    if (authBusy) return;
 
-async function loadProfile() {
-  const { data: userData } = await sb.auth.getUser();
-  const user = userData?.user;
-
-  if (!user) {
-    setStatus("Najpierw się zaloguj.");
-    return;
-  }
-
-  await ensureProfile(user);
-
-  const { data, error } = await sb
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single();
-
-  if (error) {
-    setStatus("Nie udało się wczytać profilu.");
-    console.error(error.message);
-    return;
-  }
-
-  displayNameInput.value = data.display_name || "";
-  setStatus(`Zalogowano jako: ${user.email}`);
-}
-
-async function saveProfile() {
-  const { data: userData } = await sb.auth.getUser();
-  const user = userData?.user;
-
-  if (!user) {
-    setStatus("Najpierw się zaloguj.");
-    return;
-  }
-
-  const { error } = await sb.from("profiles").upsert({
-    id: user.id,
-    email: user.email,
-    display_name: displayNameInput.value.trim()
+    if (authMode === "login") {
+      ustawTrybRejestracji();
+    } else {
+      ustawTrybLogowania();
+    }
   });
 
-  if (error) {
-    setStatus("Nie udało się zapisać profilu.");
-    console.error(error.message);
-    return;
-  }
-
-  setStatus("Profil zapisany.");
-}
-
-async function register() {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  if (!email || !password) {
-    setStatus("Podaj email i hasło.");
-    return;
-  }
-
-  const { data, error } = await sb.auth.signUp({
-    email,
-    password
+  rememberCheckbox.addEventListener("change", () => {
+    if (!rememberCheckbox.checked) {
+      localStorage.removeItem("savedEmail");
+      localStorage.setItem("rememberUser", "false");
+    }
   });
 
-  if (error) {
-    setStatus(error.message);
-    return;
+  async function startApp() {
+    const savedEmail = localStorage.getItem("savedEmail");
+    const rememberUser = localStorage.getItem("rememberUser") === "true";
+
+    if (savedEmail) {
+      emailInput.value = savedEmail;
+      rememberCheckbox.checked = true;
+    }
+
+    ustawTrybLogowania();
+
+    const { data, error } = await sb.auth.getSession();
+
+    if (error) {
+      pokazLogowanie();
+      return;
+    }
+
+    const session = data?.session;
+
+    if (!rememberUser && session) {
+      await sb.auth.signOut();
+      pokazLogowanie();
+      return;
+    }
+
+    if (rememberUser && session?.user) {
+      const nick = await pobierzNick(session.user.id);
+      pokazMenu(nick);
+      return;
+    }
+
+    pokazLogowanie();
   }
 
-  if (data.session) {
-    await loadProfile();
-    setStatus("Konto utworzone i zalogowano.");
-  } else {
-    setStatus("Konto utworzone. Sprawdź email i potwierdź rejestrację, jeśli wymagane.");
-  }
-}
-
-async function login() {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  const { error } = await sb.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if (error) {
-    setStatus(error.message);
-    return;
-  }
-
-  await loadProfile();
-}
-
-async function logout() {
-  await sb.auth.signOut();
-  displayNameInput.value = "";
-  setStatus("Wylogowano.");
-}
-
-async function init() {
-  const { data } = await sb.auth.getSession();
-  const session = data?.session;
-
-  if (session) {
-    await loadProfile();
-  } else {
-    setStatus("Nie jesteś zalogowany.");
-  }
-}
-
-registerBtn.addEventListener("click", register);
-loginBtn.addEventListener("click", login);
-logoutBtn.addEventListener("click", logout);
-saveProfileBtn.addEventListener("click", saveProfile);
-loadProfileBtn.addEventListener("click", loadProfile);
-
-sb.auth.onAuthStateChange(async (_event, session) => {
-  if (session) {
-    await loadProfile();
-  } else {
-    displayNameInput.value = "";
-    setStatus("Nie jesteś zalogowany.");
-  }
+  await startApp();
 });
-
-init();
