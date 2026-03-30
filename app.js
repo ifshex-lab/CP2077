@@ -1,5 +1,5 @@
-const SUPABASE_URL = "TU_WKLEJ_PROJECT_URL";
-const SUPABASE_KEY = "TU_WKLEJ_PUBLISHABLE_LUB_ANON_KEY";
+const SUPABASE_URL = "https://vpiueesmgkfyaywoplou.supabase.co";
+const SUPABASE_KEY = "sb_publishable_r5w2jn8PjgpKA55dXeNc2Q_2qgSWlpx";
 
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
