@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const loginScreen = document.querySelector(".loginScreen");
   const menuGlowne = document.querySelector(".menuGlowne");
+  const loadingScreen = document.getElementById("LoadingScreen");
 
   const emailInput = document.getElementById("email");
   const nicknameInput = document.getElementById("nickname");
@@ -19,9 +20,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   const btnLogin = document.getElementById("logowanie");
   const btnRegister = document.getElementById("rejestracja");
   const displaynickname = document.getElementById("displaynickname");
+  const logoutButtons = document.querySelectorAll(".loggout");
 
   let authMode = "login";
   let authBusy = false;
+
+  function pokazLoading() {
+    if (loadingScreen) loadingScreen.classList.remove("hidden");
+  }
+
+  function ukryjLoading() {
+    if (loadingScreen) loadingScreen.classList.add("hidden");
+  }
 
   function pokazMenu(nick) {
     displaynickname.textContent = nick || "";
@@ -67,6 +77,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   function ustawPrzyciski(stan) {
     btnLogin.disabled = stan;
     btnRegister.disabled = stan;
+    logoutButtons.forEach((btn) => {
+      btn.disabled = stan;
+    });
   }
 
   function zapiszRemember(email) {
@@ -77,6 +90,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       localStorage.removeItem("savedEmail");
     }
+  }
+
+  function wyczyscRemember() {
+    localStorage.removeItem("savedEmail");
+    localStorage.setItem("rememberUser", "false");
+    rememberCheckbox.checked = false;
   }
 
   async function pobierzNick(userId) {
@@ -105,6 +124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (authBusy) return;
     authBusy = true;
     ustawPrzyciski(true);
+    pokazLoading();
 
     try {
       const email = emailInput.value.trim();
@@ -142,6 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } finally {
       authBusy = false;
       ustawPrzyciski(false);
+      ukryjLoading();
     }
   }
 
@@ -149,6 +170,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (authBusy) return;
     authBusy = true;
     ustawPrzyciski(true);
+    pokazLoading();
 
     try {
       const email = emailInput.value.trim();
@@ -179,6 +201,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     } finally {
       authBusy = false;
       ustawPrzyciski(false);
+      ukryjLoading();
+    }
+  }
+
+  async function wyloguj() {
+    if (authBusy) return;
+    authBusy = true;
+    ustawPrzyciski(true);
+    pokazLoading();
+
+    try {
+      wyczyscRemember();
+      await sb.auth.signOut();
+      pokazLogowanie();
+    } catch (e) {
+      alert(e.message || "Błąd wylogowania");
+    } finally {
+      authBusy = false;
+      ustawPrzyciski(false);
+      ukryjLoading();
     }
   }
 
@@ -200,46 +242,57 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+  logoutButtons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      await wyloguj();
+    });
+  });
+
   rememberCheckbox.addEventListener("change", () => {
     if (!rememberCheckbox.checked) {
-      localStorage.removeItem("savedEmail");
-      localStorage.setItem("rememberUser", "false");
+      wyczyscRemember();
     }
   });
 
   async function startApp() {
-    const savedEmail = localStorage.getItem("savedEmail");
-    const rememberUser = localStorage.getItem("rememberUser") === "true";
+    pokazLoading();
 
-    if (savedEmail) {
-      emailInput.value = savedEmail;
-      rememberCheckbox.checked = true;
-    }
+    try {
+      const savedEmail = localStorage.getItem("savedEmail");
+      const rememberUser = localStorage.getItem("rememberUser") === "true";
 
-    ustawTrybLogowania();
+      if (savedEmail) {
+        emailInput.value = savedEmail;
+        rememberCheckbox.checked = true;
+      }
 
-    const { data, error } = await sb.auth.getSession();
+      ustawTrybLogowania();
 
-    if (error) {
+      const { data, error } = await sb.auth.getSession();
+
+      if (error) {
+        pokazLogowanie();
+        return;
+      }
+
+      const session = data?.session;
+
+      if (!rememberUser && session) {
+        await sb.auth.signOut();
+        pokazLogowanie();
+        return;
+      }
+
+      if (rememberUser && session?.user) {
+        const nick = await pobierzNick(session.user.id);
+        pokazMenu(nick);
+        return;
+      }
+
       pokazLogowanie();
-      return;
+    } finally {
+      ukryjLoading();
     }
-
-    const session = data?.session;
-
-    if (!rememberUser && session) {
-      await sb.auth.signOut();
-      pokazLogowanie();
-      return;
-    }
-
-    if (rememberUser && session?.user) {
-      const nick = await pobierzNick(session.user.id);
-      pokazMenu(nick);
-      return;
-    }
-
-    pokazLogowanie();
   }
 
   await startApp();

@@ -106,6 +106,7 @@ main.container{
   border-radius:15px;  
   background:var(--tło);
   box-shadow:0 0 10px var(--black),0 0 1000px var(--akcenty);
+  position:relative;
 }
 .LOGO {
   all:unset;
@@ -198,4 +199,63 @@ label.login {
     align-items:center;
   }
   
+}
+#whoLogged{
+  color:var(--blue);
+  position:absolute;
+  top:70px;
+  font-size:30px;
+  font-family: 'grafiti';
+  text-shadow: 0 0 10px var(--black);
+  left:100px;
+  transform:translateX(-50%);
+
+}
+#LoadingScreen{
+  width:100vw;
+  height:100vh;
+  background:black;
+  position:absolute;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  color: var(--akcenty);
+  position: relative;
+  background: radial-gradient(10px,currentColor 94%,#0000);
+}
+.loader:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(9px at bottom right,#0000 94%,currentColor) top    left,
+    radial-gradient(9px at bottom left ,#0000 94%,currentColor) top    right,
+    radial-gradient(9px at top    right,#0000 94%,currentColor) bottom left,
+    radial-gradient(9px at top    left ,#0000 94%,currentColor) bottom right;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  animation: l18 1.5s infinite cubic-bezier(0.3,1,0,1);
+}
+@keyframes l18 {
+   33%  {inset:-10px;transform: rotate(0deg)}
+   66%  {inset:-10px;transform: rotate(90deg)}
+   100% {inset:0    ;transform: rotate(90deg)}
+}
+.mainMenu{
+  margin-top:25px;
+  width:250px;
+  height:50px;
+  border:5px double var(--akcenty);
+  background:transparent;
+  color:var(--akcenty);
+  font-family: 'logo';
+  font-size:30px;
+  border-radius:5px;
+  text-transform: uppercase;
 }
