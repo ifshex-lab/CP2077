@@ -91,7 +91,7 @@ main.container{
 .okno {
   all:unset;
   width:400px;
-  height:70vh;
+  height:400px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -109,4 +109,13 @@ main.container{
   height:40px;
   font-size:50px;
   text-align: center;
+  position:relative;
+}
+.LOGO::after{
+  content:"2077";
+  color:var(--blue);
+  font-family: 'grafiti';
+  position:absolute;
+  transform:translateX(-50px) translateY(30px);
+  text-shadow: 0 0 10px var(--black)
 }
