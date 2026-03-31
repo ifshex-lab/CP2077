@@ -9,6 +9,9 @@ async function rzut(kosc) {
     const pojemnik = document.createElement("div");
     pojemnik.classList.add("pojemnikKosci");
     pojemnik.classList.add("jeszczenie");
+    const samakosc = document.createElement("div");
+    samakosc.classList.add("kosc");
+    pojemnik.appendChild(samakosc);
 
 
 switch(kosc) {
@@ -26,7 +29,7 @@ switch(kosc) {
     await sleep(100);
     tlo.classList.remove("jeszczenie");
     pojemnik.classList.remove("jeszczenie");
-     await sleep(1000);
+     await sleep(5000);
     tlo.classList.add("jeszczenie");
     pojemnik.classList.add("jeszczenie");
      await sleep(1000);
