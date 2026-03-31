@@ -67,7 +67,7 @@ async function rzut(kosc) {
 }
 
 
-rzut("k4");
+// rzut("k4");
 
 function bezierKwadratowy(p0, p1, p2, t) {
     const nt = 1 - t;
