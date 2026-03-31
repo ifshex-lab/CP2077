@@ -373,3 +373,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await startApp();
 });
+document.getElementById("btnFullscreen").addEventListener("click", async () => {
+  const el = document.documentElement;
+  if (el.requestFullscreen) {
+    await el.requestFullscreen();
+  }
+});
