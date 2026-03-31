@@ -1,0 +1,206 @@
+class Character {
+	constructor(
+		rzuty = null,
+		unikalneID = '',
+		klasa = null,
+		podklasa = null,
+		umiejetnosc_specjalna = null,
+		umiejetnosc_specjalna_wartosc = null,
+		czlowieczenstwo = 20,
+		cechy =[
+			  { "cecha": "ESTETYKA", "skrot": "EST", "wartosc": 2 },
+			  { "cecha": "INTELIGENCJA", "skrot": "INT", "wartosc": 2 },
+			  { "cecha": "EMPATIA", "skrot": "EMP", "wartosc": 2 },
+			  { "cecha": "BUDOWA_CIALA", "skrot": "BC", "wartosc": 2 },
+			  { "cecha": "REFLEKS", "skrot": "REF", "wartosc": 2 },
+			  { "cecha": "OPANOWANIE", "skrot": "OP", "wartosc": 2 },
+			  { "cecha": "PERCEPCJA", "skrot": "PER", "wartosc": 2 },
+			  { "cecha": "ZDOLNOSCI_MEDYCZNE", "skrot": "MED", "wartosc": 2 },
+			  { "cecha": "ZDOLNOSCI_TECHNICZNE", "skrot": "TECH", "wartosc": 2 },
+			  { "cecha": "SZCZESCIE", "skrot": "SZCZ", "wartosc": 2 },
+			  { "cecha": "SZYBKOSC", "skrot": "SZYB", "wartosc": 2 },
+			  { "cecha": "BIEG", "skrot": "BIEG", "wartosc": 4 }
+			],
+
+		umiejetnosci = [
+			{ "umiejetnosc": "moda i styl", "wartosc": 0 }, 
+			{ "umiejetnosc": "charakteryzacja", "wartosc": 0 },
+			{ "umiejetnosc": "fotografia/film", "wartosc": 0 }, 
+			{ "umiejetnosc": "granie na instrumencie", "wartosc": 0 },
+			{ "umiejetnosc": "malowanie/rysowanie", "wartosc": 0 }, 
+			{ "umiejetnosc": "komponowanie", "wartosc": 0 },
+			{ "umiejetnosc": "aktorstwo", "wartosc": 0 }, 
+			{ "umiejetnosc": "śpiew", "wartosc": 0 },
+			{ "umiejetnosc": "wiedza ogólna", "wartosc": 0 }, 
+			{ "umiejetnosc": "biologia", "wartosc": 0 },
+			{ "umiejetnosc": "botanika", "wartosc": 0 }, 
+			{ "umiejetnosc": "chemia", "wartosc": 0 },
+			{ "umiejetnosc": "fizyka", "wartosc": 0 }, 
+			{ "umiejetnosc": "geografia", "wartosc": 0 },
+			{ "umiejetnosc": "historia", "wartosc": 0 }, 
+			{ "umiejetnosc": "matematyka", "wartosc": 0 },
+			{ "umiejetnosc": "psychologia", "wartosc": 0 }, 
+			{ "umiejetnosc": "nauczanie", "wartosc": 0 },
+			{ "umiejetnosc": "programowanie", "wartosc": 0 }, 
+			{ "umiejetnosc": "znajomość sieci", "wartosc": 0 },
+			{ "umiejetnosc": "etykieta", "wartosc": 0 }, 
+			{ "umiejetnosc": "perswazja", "wartosc": 0 },
+			{ "umiejetnosc": "przeprowadzanie wywiadów", "wartosc": 0 }, 
+			{ "umiejetnosc": "zdolności przywódcze", "wartosc": 0 },
+			{ "umiejetnosc": "uwodzenie", "wartosc": 0 }, 
+			{ "umiejetnosc": "uspokajanie", "wartosc": 0 },
+			{ "umiejetnosc": "wytrzymałość", "wartosc": 0 }, 
+			{ "umiejetnosc": "wysportowanie", "wartosc": 0 },
+			{ "umiejetnosc": "dźwiganie", "wartosc": 0 }, 
+			{ "umiejetnosc": "ciężka broń", "wartosc": 0 },
+			{ "umiejetnosc": "spostrzegawczość", "wartosc": 0 }, 
+			{ "umiejetnosc": "przeszukiwanie", "wartosc": 0 },
+			{ "umiejetnosc": "przeszukiwanie data base", "wartosc": 0 }, 
+			{ "umiejetnosc": "postrzeganie emocji", "wartosc": 0 },
+			{ "umiejetnosc": "śledzenie", "wartosc": 0 }, 
+			{ "umiejetnosc": "walka wręcz", "wartosc": 0 },
+			{ "umiejetnosc": "broń ręczna", "wartosc": 0 }, 
+			{ "umiejetnosc": "unikanie ciosów", "wartosc": 0 },
+			{ "umiejetnosc": "pistolet", "wartosc": 0 }, 
+			{ "umiejetnosc": "pistolet maszynowy", "wartosc": 0 },
+			{ "umiejetnosc": "karabin", "wartosc": 0 }, 
+			{ "umiejetnosc": "karabin snajperski", "wartosc": 0 },
+			{ "umiejetnosc": "strzelba", "wartosc": 0 }, 
+			{ "umiejetnosc": "kradzież kieszonkowa", "wartosc": 0 },
+			{ "umiejetnosc": "taniec", "wartosc": 0 }, 
+			{ "umiejetnosc": "wymykanie się", "wartosc": 0 },
+			{ "umiejetnosc": "akrobatyka", "wartosc": 0 }, 
+			{ "umiejetnosc": "odporność na tortury", "wartosc": 0 },
+			{ "umiejetnosc": "odporność na narkotyki", "wartosc": 0 }, 
+			{ "umiejetnosc": "odporność na toksyny", "wartosc": 0 },
+			{ "umiejetnosc": "przemawianie", "wartosc": 0 }, 
+			{ "umiejetnosc": "przesłuchiwanie", "wartosc": 0 },
+			{ "umiejetnosc": "znajomość półświatka", "wartosc": 0 }, 
+			{ "umiejetnosc": "gry hazardowe", "wartosc": 0 },
+			{ "umiejetnosc": "ukrywanie się", "wartosc": 0 }, 
+			{ "umiejetnosc": "dedukcja", "wartosc": 0 },
+			{ "umiejetnosc": "kłamanie", "wartosc": 0 }, 
+			{ "umiejetnosc": "skradanie się", "wartosc": 0 },
+			{ "umiejetnosc": "pierwsza pomoc", "wartosc": 0 }, 
+			{ "umiejetnosc": "diagnoza lekarska", "wartosc": 0 },
+			{ "umiejetnosc": "farmaceutyka", "wartosc": 0 }, 
+			{ "umiejetnosc": "chirurgia", "wartosc": 0 },
+			{ "umiejetnosc": "stabilizacja", "wartosc": 0 }, 
+			{ "umiejetnosc": "otwieranie zamków", "wartosc": 0 },
+			{ "umiejetnosc": "zabezpieczenia elektroniczne", "wartosc": 0 }, 
+			{ "umiejetnosc": "materiały wybuchowe", "wartosc": 0 },
+			{ "umiejetnosc": "naprawy podstawowe", "wartosc": 0 }, 
+			{ "umiejetnosc": "naprawy pojazdów", "wartosc": 0 },
+			{ "umiejetnosc": "naprawy uzbrojenia", "wartosc": 0 },
+			{ "umiejetnosc": "elektronika", "wartosc": 0 },
+			{ "umiejetnosc": "fałszerstwo", "wartosc": 0 }, 
+			{ "umiejetnosc": "cybertechnika", "wartosc": 0 },
+			{ "umiejetnosc": "znajomość uzbrojenia", "wartosc": 0 }, 
+			{ "umiejetnosc": "projektowanie cyberdecków", "wartosc": 0 }
+		],
+		plec = null,
+		wiek = null,
+		rok = null,
+		wzrost = null,
+		masa = null,
+		pochodzenie_rodziny = null,
+		narodowosc = null,
+		miejsce_urodzenia = null,
+		wyglad = {
+			wlosy: [],
+			oczy: [],
+			znaki: {
+				tatuaze: "",
+				piercing: "",
+				zarost: "",
+				blizny: "",
+				inne: ""
+			},
+			prawe_oko: [],
+			lewe_oko: []
+		},
+		ubior = {
+			glowa: "",
+			tors: "",
+			spodnie: "",
+			buty: "",
+			akcesoria: ""
+		},
+		jezyki = [],
+		stan_cywilny = "",
+		cechy_osobowosci = [null,null,null,null,null],
+		dodatkowe_informacje = [],
+		ceniona_osoba = '',
+		co_cenisz = '',
+		co_czujesz_do_ludzi = '',
+		tlo_rodzinne = '',
+		ulubiony_przedmiot = '',
+		motto = '',
+		choroby = [],
+		uzaleznienia = [],
+		eurodolary = 0,
+		reputacja = 0,
+		wydarzenia = [],
+		ekwipunek = {},
+		ukryty_cel = {nazwa: "", opis: ""},
+		imie = '',
+		nazwisko = '',
+		buffor = '',
+		ram = '',
+		sloty = '',
+		procesor = '',
+		cyberdeck = '',
+		bc_opis = '',
+		mbc = 0,
+		wb = {
+			glowa: 0,
+			tulow: 0,
+			nogi:0
+		},
+		pseudonim = ''
+
+
+	){
+		this.bc_opis = bc_opis;
+		this.mbc = mbc;
+		this.wb = wb;
+		this.rzuty = rzuty;
+		this.klasa = klasa;
+		this.podklasa = podklasa;
+		this.cechy = cechy;
+		this.umiejetnosci = umiejetnosci;
+		this.umiejetnosc_specjalna = umiejetnosc_specjalna;
+		this.umiejetnosc_specjalna_wartosc = umiejetnosc_specjalna_wartosc;
+		this.plec = plec;
+		this.wiek = wiek;
+		this.rok = rok;
+		this.wzrost = wzrost;
+		this.masa = masa;
+		this.pochodzenie_rodziny = pochodzenie_rodziny;
+		this.narodowosc = narodowosc;
+		this.miejsce_urodzenia = miejsce_urodzenia;
+		this.wyglad = wyglad;
+		this.ubior = ubior;
+		this.jezyki = jezyki;
+		this.stan_cywilny = stan_cywilny;
+		this.cechy_osobowosci = cechy_osobowosci;
+		this.dodatkowe_informacje = dodatkowe_informacje;
+		this.ceniona_osoba = ceniona_osoba;
+		this.co_cenisz = co_cenisz;
+		this.co_czujesz_do_ludzi = co_czujesz_do_ludzi;
+		this.tlo_rodzinne = tlo_rodzinne;
+		this.ulubiony_przedmiot = ulubiony_przedmiot;
+		this.motto = motto;
+		this.choroby = choroby;
+		this.uzaleznienia = uzaleznienia;
+		this.eurodolary = eurodolary;
+		this.reputacja = reputacja;
+		this.wydarzenia = wydarzenia;
+		this.ekwipunek = ekwipunek;
+		this.ukryty_cel = ukryty_cel;
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.pseudonim = pseudonim;
+		this.czlowieczenstwo = czlowieczenstwo;
+	}
+}

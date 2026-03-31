@@ -224,6 +224,79 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  async function pobierzKlasyPostaci() {
+    const { data, error } = await sb
+      .from("KLASY_POSTACI")
+      .select("*")
+      .order("ID", { ascending: true });
+
+    if (error) {
+      console.error("Błąd pobierania KLASY_POSTACI:", error);
+      return [];
+    }
+
+    const kolumnyJakoTablice = [
+      "UMIEJĘTNOŚCI KLASOWE",
+      "UMIEJĘTNOŚCI PODKLASY",
+      "NAJWAŻNIEJSZE CECHY",
+      "DODATKOWE INFORMACJE"
+    ];
+
+    function rozbijPoPrzecinkach(wartosc) {
+      if (!wartosc || typeof wartosc !== "string") return [];
+      return wartosc
+        .split(",")
+        .map(e => e.trim())
+        .filter(e => e !== "");
+    }
+
+    function oczyscWartosc(wartosc) {
+      if (wartosc == null) return "";
+      if (typeof wartosc !== "string") return wartosc;
+      return wartosc.trim();
+    }
+
+    return data.map(wiersz => {
+      const nowyWiersz = {};
+
+      for (const klucz in wiersz) {
+        if (kolumnyJakoTablice.includes(klucz)) {
+          nowyWiersz[klucz] = rozbijPoPrzecinkach(wiersz[klucz]);
+        } else {
+          nowyWiersz[klucz] = oczyscWartosc(wiersz[klucz]);
+        }
+      }
+
+      return {
+        id: nowyWiersz["ID"],
+        klasa: nowyWiersz["KLASA"],
+        podklasa: nowyWiersz["PODKLASA"],
+        umiejetnoscSpecjalna: nowyWiersz["UMIEJĘTNOŚĆ SPECJALNA"],
+        umiejetnosciKlasowe: nowyWiersz["UMIEJĘTNOŚCI KLASOWE"],
+        umiejetnosciPodklasy: nowyWiersz["UMIEJĘTNOŚCI PODKLASY"],
+        typKlasy: nowyWiersz["TYP KLASY"],
+        typWalki: nowyWiersz["TYP WALKI"],
+        najwazniejszeCechy: nowyWiersz["NAJWAŻNIEJSZE CECHY"],
+        dodatkoweInformacje: nowyWiersz["DODATKOWE INFORMACJE"],
+        przygotowanieSie: nowyWiersz["PRZYGOTOWANIE SIĘ"],
+        nazwaStyluWalki: nowyWiersz["NAZWA STYLU WALKI"],
+        umiejetnoscPasywnaNazwa: nowyWiersz["UMIEJĘTNOŚC PASYWNA - NAZWA"],
+        umiejetnoscPasywnaOpis: nowyWiersz["UMIEJĘTNOŚĆ PASYWNA - OPIS"],
+        akcjaDodatkowa1Nazwa: nowyWiersz["AKCJA DODATKOWA 1 - NAZWA"],
+        akcjaDodatkowa1Opis: nowyWiersz["AKCJA DODATKOWA 1 - OPIS"],
+        akcjaDodatkowa2Nazwa: nowyWiersz["AKCJA DODATKOWA 2 - NAZWA"],
+        akcjaDodatkowa2Opis: nowyWiersz["AKCJA DODATKOWA 2 - OPIS"],
+        akcjaGlowna1Nazwa: nowyWiersz["AKCJA GŁÓWNA 1 - NAZWA"],
+        akcjaGlowna1Opis: nowyWiersz["AKCJA GŁÓWNA 1 - OPIS"],
+        akcjaGlowna2Nazwa: nowyWiersz["AKCJA GŁÓWNA 2 - NAZWA"],
+        akcjaGlowna2Opis: nowyWiersz["AKCJA GŁÓWNA 2 - OPIS"],
+        shortRest: nowyWiersz["SHORT REST"],
+        longRest: nowyWiersz["LONG REST"],
+        opis: nowyWiersz["OPIS"]
+      };
+    });
+  }
+
   btnLogin.addEventListener("click", async () => {
     if (authMode === "login") {
       await zaloguj();
@@ -294,6 +367,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       ukryjLoading();
     }
   }
+
+  window.KlasyPostaci = await pobierzKlasyPostaci();
+  // console.log(window.KlasyPostaci);
 
   await startApp();
 });
