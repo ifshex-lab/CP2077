@@ -55,8 +55,8 @@
 } */
 
 .samakosc {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   background: var(--akcenty);
   border-radius: 50%;
 }
@@ -77,3 +77,4 @@
     transform: translate(0px, 0px) scale(1);
   }
 } */
+
