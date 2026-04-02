@@ -27,14 +27,17 @@ async function rzut(kosc) {
 
     boxkosc.appendChild(samakosc);
     pojemnik.appendChild(boxkosc);
-
+    let liczbaG
+    let liczbaT;
+    let liczbaP;
+    let liczbaL;
+    let liczbaPrz;
+    let liczbaD;
     switch (kosc) {
         case "k4":
-           const liczbaG = Math.floor(Math.random() * 4) + 1;
+            liczbaG = Math.floor(Math.random() * 4) + 1;
 
-            let liczbaT;
-            let liczbaP;
-            let liczbaL;
+            
 
             switch (liczbaG) {
             case 1:
@@ -75,6 +78,68 @@ async function rzut(kosc) {
             wynik = liczbaG;
             break;
         case "k6":
+                liczbaG = Math.floor(Math.random() * 6) + 1;
+                switch (liczbaG) {
+            case 1:
+                liczbaP = 4;
+                liczbaPrz = 2;
+                liczbaT = 5;
+                liczbaD = 6;
+                liczbaL = 3;
+                break;
+            case 2:
+                liczbaP = 4;
+                liczbaPrz = 6;
+                liczbaT = 1;
+                liczbaD = 5;
+                liczbaL = 3;
+                break;
+            case 3:
+                liczbaP = 2;
+                liczbaPrz = 6;
+                liczbaT = 1;
+                liczbaD = 4;
+                liczbaL = 5;
+                break;
+            case 4:
+                liczbaP = 5;
+                liczbaPrz = 6;
+                liczbaT = 1;
+                liczbaD = 3;
+                liczbaL = 2;
+                break;
+            case 5:
+                liczbaP = 4;
+                liczbaPrz = 1;
+                liczbaT = 6;
+                liczbaD = 2;
+                liczbaL = 3;
+                break;
+            case 6:
+                liczbaP = 4;
+                liczbaPrz = 5;
+                liczbaT = 2;
+                liczbaD = 1;
+                liczbaL = 3;
+                break;
+            }
+            cialoKosci = `
+
+				<div class="k6cubecontainer" >
+                <div class="obrot2">
+                        <div class="obrot1">
+					<div class="k6cube">
+						<div class="k6side_1" data-number="${liczbaD}"></div>
+						<div class="k6side_2" data-number="${liczbaT}"></div>
+						<div class="k6side_3" data-number="${liczbaL}"></div>
+						<div class="k6side_4" data-number="${liczbaP}"></div>
+						<div class="k6side_5" data-number="${liczbaPrz}"></div>
+						<div class="k6side_6" data-number="${liczbaG}"></div>
+					</div>
+					</div>
+					</div>
+			</div>`;
+            wynik = liczbaG;
             // samakosc.textContent = "6";
             break;
         case "k10":
@@ -112,9 +177,9 @@ async function rzut(kosc) {
 }
 
 
-rzut("k4").then((wynik) => {
-    console.log(wynik);
-});
+// rzut("k6").then((wynik) => {
+//     console.log(wynik);
+// });
 
 function bezierKwadratowy(p0, p1, p2, t) {
     const nt = 1 - t;
