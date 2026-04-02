@@ -11,6 +11,8 @@ function sleep(ms) {
 }
 
 async function rzut(kosc) {
+    let cialoKosci; 
+
     const tlo = document.createElement("div");
     tlo.classList.add("tlokosci", "jeszczenie");
 
@@ -28,7 +30,17 @@ async function rzut(kosc) {
 
     switch (kosc) {
         case "k4":
-            // samakosc.textContent = "4";
+            cialoKosci=`
+            <div class="k4cubecontainer" >
+                <div class="obrot2">
+						<div class="k4cube show1">
+							<div class="k4side_1" ><span class="tlokosc4"></span></div>
+							<div class="k4side_2" ><span class="tlokosc4"></span></div>
+							<div class="k4side_3" ><span class="tlokosc4"></span></div>
+							<div class="k4side_4" ><span class="tlokosc4"></span></div>
+						</div>
+					</div>
+				</div>`
             break;
         case "k6":
             // samakosc.textContent = "6";
@@ -43,7 +55,7 @@ async function rzut(kosc) {
 
     document.body.appendChild(tlo);
     document.body.appendChild(pojemnik);
-
+    samakosc.innerHTML = cialoKosci;
     await sleep(50);
 
     tlo.classList.remove("jeszczenie");
@@ -55,19 +67,19 @@ async function rzut(kosc) {
     // void boxkosc.offsetWidth;
     // boxkosc.classList.add("rzut");
     odbijaj(boxkosc);
-    await sleep(10000);
+    // await sleep(3000);
 
-    tlo.classList.add("jeszczenie");
-    pojemnik.classList.add("jeszczenie");
+    // tlo.classList.add("jeszczenie");
+    // pojemnik.classList.add("jeszczenie");
 
-    await sleep(1000);
+    // await sleep(1000);
 
-    pojemnik.remove();
-    tlo.remove();
+    // pojemnik.remove();
+    // tlo.remove();
 }
 
 
-// rzut("k4");
+rzut("k4");
 
 function bezierKwadratowy(p0, p1, p2, t) {
     const nt = 1 - t;
