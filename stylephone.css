@@ -45,4 +45,23 @@ main.container{
   align-items:center;
   
 }
+.kreator {
+  &.schowany{
+
+  }
+
+  .stage{
+    h1{
+
+    }
+    .stageBody{
+
+      }
+    }
+  }
+  
+}
+
+.hidden{
+  display:none !important;
 }

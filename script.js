@@ -204,3 +204,17 @@ class Character {
 		this.czlowieczenstwo = czlowieczenstwo;
 	}
 }
+
+function kreatorStart() {
+	const mainMenu = document.getElementById("mainMenu")
+	const kreator = document.getElementById("kreator")
+
+
+
+
+
+	mainMenu.classList.add("hidden");
+	kreator.classList.remove("schowany");
+
+
+}
