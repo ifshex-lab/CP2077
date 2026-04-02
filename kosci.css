@@ -132,35 +132,35 @@
 .k4side_3 {transform: rotateY(240deg) rotateX(19.47deg);}
 .k4side_4 {transform: translateZ(-57.7px) translateY(81.6px) rotateX(90deg);}
 .k4side_1::before, .k4side_2::before, .k4side_3::before {
-	content: '1'; 
+	content: attr(data-liczbaG); 
     position: absolute;
-    bottom: -36px; 
+    bottom: -49px; 
     left: 50%;
     transform: translateX(-50%); 
     color: var(--zolty); 
-    font-size: 20px; 
+    font-size: 25px; 
     font-weight: bold;
     pointer-events: none; 
 	font-family: 'Neuropol', sans-serif;
 	z-index:100;
 }
 .k4side_1::after {
-	content: '2'; 
+	content: attr(data-liczbaP); 
     position: absolute;
-    bottom: -55px; 
+    bottom: -64px; 
     left: 50%;
     transform: translateX(-50%); 
     color: var(--zolty); 
-    font-size: 20px; 
+    font-size: 25px; 
     font-weight: bold;
     pointer-events: none; 
 	font-family: 'Neuropol', sans-serif;
 	z-index:100;
-	transform-origin: center 31px;
+	transform-origin: center 26px;
 	transform: rotateZ(120deg);
 }
 .k4side_2::after {
-	content: '4'; 
+	content: attr(data-liczbaT); 
     position: absolute;
     bottom: -66px; 
     left: 50%;
@@ -175,7 +175,7 @@
 	transform: rotateZ(120deg);
 }
 .k4side_3::after {
-	content: '3'; 
+	content: attr(data-liczbaL); 
     position: absolute;
     bottom: -55px; 
     left: 50%;
@@ -190,7 +190,7 @@
 	transform: rotateZ(120deg);
 }
 .k4side_4::before {
-	content: '4'; 
+	content: attr(data-liczbaT); 
     position: absolute;
     bottom: -42px; 
     left: 50%;
@@ -203,7 +203,7 @@
 	z-index:100;
 }
 .k4side_4::after {
-	content: '2'; 
+	content: attr(data-liczbaP); 
     position: absolute;
     bottom: -55px; 
     left: 50%;
@@ -220,29 +220,29 @@
 .k4side_1 span::after,.k4side_2 span::after,.k4side_3 span::after,.k4side_4 span::after {
 
     position: absolute;
-    bottom: -21px; 
+    bottom: -35px; 
     left: 50%;
     transform: translateX(-50%); 
     color: var(--zolty); 
-    font-size: 20px; 
+    font-size: 25px; 
     font-weight: bold;
     pointer-events: none; 
 	font-family: 'Neuropol', sans-serif;
 	z-index:100;
-	transform-origin: center 49px;
+	transform-origin: center 42px;
 	transform: rotateZ(240deg);
 }
 .k4side_1 span::after{
-	content: '3'; 
+	content: attr(data-liczbaL); 
 }
 .k4side_2 span::after{
-	content: '2'; 
+	content: attr(data-liczbaP); 
 }
 .k4side_3 span::after{
-	content: '4'; 
+	content: attr(data-liczbaT); 
 }
 .k4side_4 span::after{
-	content: '3'; 
+	content: attr(data-liczbaL); 
 }
 .k4cube.show1 { transform: rotateX(-90deg);}
 .k4cube.show2 { transform: rotateY(-60deg);}
@@ -258,7 +258,16 @@
 	height: var(--wysokosc4);
 	transform-style: preserve-3d;
 	transition: transform 0.3s ease-in-out;
+  transform:rotatex(70deg);
 
 	}
+  .obrot1 {
+    position: relative;
+	width: var(--szerokosc4);
+	height: var(--wysokosc4);
+	transform-style: preserve-3d;
+	transition: transform 0.3s ease-in-out;
+  transform:rotatez(40deg);
+  }
 	
 	
