@@ -310,6 +310,10 @@
   transform:rotatex(64deg) translateY(-15px);
 }
 
+.obrot2k20{
+  transform:rotatex(-142deg) rotateY(-85deg) translatex(-7px) translatey(55px);
+}
+
 
 
 
@@ -326,3 +330,350 @@
 .k6cube.show2 {transform:rotateY(-90deg);}
 .k6cube.show5 {transform:rotateX(90deg);}
 .k6cube.show6 {transform:rotateY(0deg);}
+
+/* --------------------------------K10------------------------------------ */
+:root { 
+	--szerokosc:102px;
+	--wysokosc:100px;
+	--katpochylenia:44deg;
+	--miedzywierzchalkami:158px;
+	--katodgory:72px;
+}
+body>.kosc{
+	transform:translateX(-50%);
+	left:50%;
+	#dlaanimacjik10 > div > div > div::after {
+		transform: translate(50%, 27%);
+	}
+	#dlaanimacjik10 > div > div > div.k6side_1::after {
+		transform: translate(398%, 27%);
+	}
+}
+.kosc { 
+	position: fixed;
+	display:flex;
+	width:calc(100vw - 100px);
+	height:200px; 
+	border:4px solid var(--zolty);
+	border-radius:20px;
+	align-content:center;
+	justify-content:center;
+	perspective: 1000px;
+	z-index: 9999999999999999999999999999999999;
+	top: 50px;
+	background: var(--zoltyciemniejszy);
+	box-shadow:
+		0 0 0 10px var(--black),
+		0 0 0 12px var(--zolty),
+		0 0 0 5px black,
+		0px 0px 800px 400px black;
+	transition: width 0.8s ease, height 0.8s ease, border 0.8s ease, box-shadow 0.8s ease, transform 0.8s ease, overflow 0.8s ease;
+	
+}
+.k10cubecontainer { 
+	perspective: 1000px;
+	transform:translatey(-25px);
+	
+	
+}
+.k10cube,.k10cube * {
+	position: relative;
+	width: var(--szerokosc);
+	height: var(--wysokosc);
+	transform-style: preserve-3d;
+	transition: transform 0.3s ease-in-out;
+	transform-origin: center;
+	
+	
+}
+.k10cube {
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translatey(0px);
+
+}
+.k10cube div {
+	position: absolute;
+    width: 0;
+    height: 0;
+    border-left: calc(var(--szerokosc)/2) solid transparent;
+    border-right: calc(var(--szerokosc)/2) solid transparent;
+    transform-origin: top center;
+	border-bottom: var(--wysokosc) solid var(--zolty);
+}
+.k10side_1 {transform:   translatey(var(--miedzywierzchalkami)) rotateX(180deg) rotatex(var(--katpochylenia));}
+.k10side_3 {transform:   translatey(var(--miedzywierzchalkami)) rotateX(180deg) rotateY(72deg)  rotatex(var(--katpochylenia));}
+.k10side_5 {transform:   translatey(var(--miedzywierzchalkami)) rotateX(180deg) rotateY(144deg) rotatex(var(--katpochylenia));}
+.k10side_7 {transform:   translatey(var(--miedzywierzchalkami)) rotateX(180deg) rotateY(216deg) rotatex(var(--katpochylenia));}
+.k10side_9 {transform:   translatey(var(--miedzywierzchalkami)) rotateX(180deg) rotateY(288deg) rotatex(var(--katpochylenia));}
+
+.k10side_2 {transform: rotateY(0deg) rotatex(var(--katpochylenia));}
+.k10side_4 {transform:  rotateY(72deg)  rotatex(var(--katpochylenia));}
+.k10side_6 {transform:  rotateY(144deg) rotatex(var(--katpochylenia));}
+.k10side_8 {transform:  rotateY(216deg) rotatex(var(--katpochylenia));}
+.k10side_10 {transform:  rotateY(288deg) rotatex(var(--katpochylenia));}
+
+.k10cube span.tlokosc10::after {
+	content: attr(data-number); 
+    position: absolute;
+    bottom: -90px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    color: var(--zolty); 
+    font-size: 40px; 
+    font-weight: bold;
+    pointer-events: none; 
+	font-family: 'Neuropol', sans-serif;
+	transition: color 0.5s ease;
+	}
+/* .k10side_2 span.tlokosc10::after{ } */
+.k10cube span.tlokosc10::before {
+	content:'';
+	width: 0;
+	height: 0;
+	position:absolute;
+	border-left: calc(var(--szerokosc) / 2 - 5px) solid transparent;
+    border-right: calc(var(--szerokosc) / 2 - 5px) solid transparent;
+	border-top: calc(var(--wysokosc)/5 - 2px) solid black;
+	transform: translateX(-50%) translateY(calc(var(--wysokosc) - 10px));
+	}
+.k10cube div::before {
+	content:'';
+	width: 0;
+	height: 0;
+	position: absolute;
+	border-left: calc(var(--szerokosc)/2) solid transparent;
+    border-right: calc(var(--szerokosc)/2) solid transparent;
+	border-top: calc(var(--wysokosc)/5) solid var(--zolty);
+	transform: translateX(-50%) translateY(var(--wysokosc));
+	}
+.k10cube div::after {
+	content:'';
+	width: calc(var(--szerokosc) - 20px);
+	height: 2px;
+	position: absolute;
+	background-color:black;
+	transform:translatey(calc(var(--wysokosc) - 1px)) translatex(-50%);
+	}
+.k10cube span.tlokosc10 {
+	width: 0;
+	height: 0;
+	position: absolute;
+	display: block; /* Domyślnie span jest inline, co może ukrywać border */
+	transform:translatex(-50%) translatey(10px);
+	border-left: calc(var(--szerokosc) / 2 - 5px) solid transparent;
+	border-right: calc(var(--szerokosc) / 2 - 5px) solid transparent;
+	border-bottom: calc(var(--wysokosc) - 10px) solid black;
+
+	z-index: 99; /* Poprawiona składnia */
+}
+
+.k10cube {
+	transform-origin: center 77px;
+}
+.k10cube.show1 { transform: rotateX(168deg) rotateY(0deg) }
+.k10cube.show3 { transform: rotateX(168deg) rotateY(72deg) }
+.k10cube.show5 { transform: rotateX(168deg) rotateY(144deg) }
+.k10cube.show7 { transform: rotateX(168deg) rotateY(216deg) }
+.k10cube.show9 { transform: rotateX(168deg) rotateY(288deg) }
+
+
+.k10cube.show2 { transform: rotateX(-12deg) rotateY(0deg); }
+.k10cube.show4 { transform: rotateX(-12deg) rotateY(-72deg); }
+.k10cube.show6 { transform: rotateX(-12deg) rotateY(-144deg); }
+.k10cube.show8 { transform: rotateX(-12deg) rotateY(-216deg); }
+.k10cube.show10 { transform: rotateX(-12deg) rotateY(-288deg); }
+
+.obrot2:has(.k10cube){
+  transform:translateX(20px) rotateX(23deg);
+}
+
+.tlokosc10::after {
+    content: attr(data-number);
+}
+
+.tlokosc10.podkresl::after {
+    text-decoration: underline;
+}
+
+/* -------------------------------------------------------------------k20------------------------------------------------------- */
+.k20cube {
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translatey(0px);
+
+}
+:root {
+	--szerokosc20: 102px;
+	--wysokosc20: 86.9px;
+	--katscianygora: -52.62deg;
+	--katboki180deg: 10.81deg; 
+	--katboki0deg: 10.81deg; 
+	--dodatek:16.2px;
+	--dodatekpion:1.53px;
+	--odlegloscodsrodka180deg:calc( -68.82px - var(--dodatek));
+	--odlegloscodgory180deg:calc( 138.7px - var(--dodatekpion));
+	--odlegloscodgorydol: 190px;
+}
+.k20cubecontainer {
+	perspective: 1000px;
+	transform: scale(0.8) translateY(-53px);
+}
+.k20cube,.k20cube * {
+	position: relative;
+	width: var(--szerokosc20);
+	height: var(--wysokosc20);
+	transform-style: preserve-3d;
+	transition: transform 0.2s ease-in-out;
+	transform-origin: center 95px;
+	}
+	
+.k20cube div {
+	position: absolute;
+    width: 0;
+    height: 0;
+    border-left: calc(var(--szerokosc20)/2) solid transparent;
+    border-right: calc(var(--szerokosc20)/2) solid transparent;
+    transform-origin: top center;
+	border-bottom: var(--wysokosc20) solid var(--zolty);
+	}
+.k20cube span.tlokosc20::after {
+	content: attr(data-number); 
+    position: absolute;
+    bottom: -64px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    color: var(--zolty); 
+    font-size: 28px; 
+    font-weight: bold;
+    pointer-events: none; 
+	font-family: 'Neuropol', sans-serif;
+	z-index:100;
+	transform-origin: center center;
+	}
+.k20cube span.tlokosc20 {
+	width: 0;
+	height: 0;
+	position: absolute;
+	display: block; /* Domyślnie span jest inline, co może ukrywać border */
+	transform:translatex(-50%) translatey(5.4px);
+	border-left: calc(var(--szerokosc4) / 2 - 5px) solid transparent;
+	border-right: calc(var(--szerokosc4) / 2 - 5px) solid transparent;
+	border-bottom: calc(var(--wysokosc4) - 8.6px) solid black;
+
+	z-index: 99; /* Poprawiona składnia */
+}
+
+.k20side_1 {transform: rotateY(0deg) rotateX(var(--katscianygora));}
+.k20side_3 {transform: rotateY(144deg) rotateX(var(--katscianygora));}
+.k20side_7 {transform: rotateY(288deg) rotateX(var(--katscianygora));}
+.k20side_17 {transform: rotateY(216deg) rotateX(var(--katscianygora));}
+.k20side_19 {transform: rotateY(72deg) rotateX(var(--katscianygora));}
+
+.k20side_13 {transform: rotatey(0deg) translateZ(var(--odlegloscodsrodka180deg)) translateY(var(--odlegloscodgory180deg)) rotateZ(180deg) rotateX(var(--katboki180deg));}
+.k20side_15 {transform: rotatey(-72deg) translateZ(var(--odlegloscodsrodka180deg)) translateY(var(--odlegloscodgory180deg)) rotateZ(180deg) rotateX(var(--katboki180deg));}
+.k20side_10 {transform: rotatey(-144deg) translateZ(var(--odlegloscodsrodka180deg)) translateY(var(--odlegloscodgory180deg)) rotateZ(180deg) rotateX(var(--katboki180deg));}
+.k20side_16 {transform: rotatey(-216deg) translateZ(var(--odlegloscodsrodka180deg)) translateY(var(--odlegloscodgory180deg)) rotateZ(180deg) rotateX(var(--katboki180deg));}
+.k20side_9 {transform: rotatey(-288deg) translateZ(var(--odlegloscodsrodka180deg)) translateY(var(--odlegloscodgory180deg)) rotateZ(180deg) rotateX(var(--katboki180deg));}
+
+.k20side_5 {transform: rotatey(-36deg) translateZ(-85.07px) translateY(52.62px) rotateX(var(--katboki0deg));}
+.k20side_12 {transform: rotatey(-108deg) translateZ(-85.07px) translateY(52.62px) rotateX(var(--katboki0deg));}
+.k20side_8 {transform: rotatey(-180deg) translateZ(-85.07px) translateY(52.62px) rotateX(var(--katboki0deg));}
+.k20side_6 {transform: rotatey(-252deg) translateZ(-85.07px) translateY(52.62px) rotateX(var(--katboki0deg));}
+.k20side_11 {transform: rotatey(-324deg) translateZ(-85.07px) translateY(52.62px) rotateX(var(--katboki0deg));}
+
+.k20side_4 {transform:  translateY(var(--odlegloscodgorydol)) rotateY(-144deg) rotateX(calc(var(--katscianygora) + 180deg));}
+.k20side_14 {transform:  translateY(var(--odlegloscodgorydol)) rotateY(-72deg) rotateX(calc(var(--katscianygora) + 180deg));}
+.k20side_20 {transform:  translateY(var(--odlegloscodgorydol)) rotateY(0deg) rotateX(calc(var(--katscianygora) + 180deg));}
+.k20side_2 {transform:  translateY(var(--odlegloscodgorydol)) rotateY(72deg) rotateX(calc(var(--katscianygora) + 180deg));}
+.k20side_18 {transform:  translateY(var(--odlegloscodgorydol)) rotateY(144deg) rotateX(calc(var(--katscianygora) + 180deg));}
+
+/* obrót */
+
+.k20cube.show1 {transform: rotateX(-52.62deg) rotateY(180deg);}
+.k20cube.show7 {transform: rotateX(-52.62deg) rotateY(252deg);}
+.k20cube.show17 {transform: rotateX(-52.62deg) rotateY(324deg);}
+.k20cube.show3 {transform: rotateX(-52.62deg) rotateY(36deg);}
+.k20cube.show19 {transform: rotateX(-52.62deg) rotateY(108deg);}
+
+.k20cube.show13 {transform: rotateX(190.81deg) rotateY(0deg);}
+.k20cube.show15 {transform: rotateX(190.81deg) rotateY(72deg);}
+.k20cube.show10 {transform: rotateX(190.81deg) rotateY(144deg);}
+.k20cube.show16 {transform: rotateX(190.81deg) rotateY(216deg);}
+.k20cube.show9 {transform: rotateX(190.81deg) rotateY(288deg);}
+
+.k20cube.show5 {transform: rotateX(10.81deg) rotateY(216deg);}
+.k20cube.show12 {transform: rotateX(10.81deg) rotateY(288deg);}
+.k20cube.show8 {transform: rotateX(10.81deg) rotateY(0deg);}
+.k20cube.show6 {transform: rotateX(10.81deg) rotateY(72deg);}
+.k20cube.show11 {transform: rotateX(10.81deg) rotateY(144deg);}
+
+.k20cube.show4 {transform: rotateX(127.38deg) rotateY(324deg);}
+.k20cube.show14 {transform: rotateX(127.38deg) rotateY(252deg);}
+.k20cube.show20 {transform: rotateX(127.38deg) rotateY(180deg);}
+.k20cube.show2 {transform: rotateX(127.38deg) rotateY(108deg);}
+.k20cube.show18 {transform: rotateX(127.38deg) rotateY(36deg);}
+
+/* numerki */
+
+.k20cube .k20side_1 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg);}
+.k20cube .k20side_3 span.tlokosc20::after { transform: translateX(-50%) rotateZ(-120deg);}
+.k20cube .k20side_7 span.tlokosc20::after { transform: translateX(-50%) rotateZ(120deg)  rotateY(180deg);}
+.k20cube .k20side_17 span.tlokosc20::after { transform: translateX(-50%) rotateZ(120deg)  rotateY(180deg);}
+.k20cube .k20side_19 span.tlokosc20::after { transform: translateX(-50%) rotateZ(-120deg)  rotateY(180deg);}
+
+.k20cube .k20side_13 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg)  rotateY(180deg);}
+.k20cube .k20side_15 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg)  rotateY(180deg);}
+.k20cube .k20side_10 span.tlokosc20::after { transform: translateX(-50%) rotateZ(120deg)  rotateY(180deg);}
+.k20cube .k20side_16 span.tlokosc20::after { transform: translateX(-50%) rotateZ(-120deg)  rotateY(180deg);}
+.k20cube .k20side_9 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg)  rotateY(180deg);}
+
+.k20cube .k20side_5 span.tlokosc20::after { transform: translateX(-50%) rotateZ(120deg)  rotateY(180deg);}
+.k20cube .k20side_12 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg)  rotateY(180deg);}
+.k20cube .k20side_8 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg)  rotateY(180deg);}
+.k20cube .k20side_6 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg)  rotateY(180deg);}
+.k20cube .k20side_11 span.tlokosc20::after { transform: translateX(-50%) rotateZ(-120deg)  rotateY(180deg);}
+
+.k20cube .k20side_4 span.tlokosc20::after { transform: translateX(-50%) rotateZ(-120deg)  rotateY(180deg);}
+.k20cube .k20side_14 span.tlokosc20::after { transform: translateX(-50%) rotateZ(-120deg)  rotateY(180deg);}
+.k20cube .k20side_20 span.tlokosc20::after { transform: translateX(-50%) rotateZ(0deg)  rotateY(180deg);}
+.k20cube .k20side_2 span.tlokosc20::after { transform: translateX(-50%) rotateZ(120deg)  rotateY(180deg);}
+.k20cube .k20side_18 span.tlokosc20::after { transform: translateX(-50%) rotateZ(120deg)  rotateY(180deg);}
+
+
+/* obrót wokoł Z */
+
+.obrot2k20:has(.k20cube.show1) {transform: rotateZ(0deg)}
+.obrot2k20:has(.k20cube.show7) {transform: rotateZ(120deg)}
+.obrot2k20:has(.k20cube.show17) {transform: rotateZ(120deg)}
+.obrot2k20:has(.k20cube.show3) {transform: rotateZ(-120deg)}
+.obrot2k20:has(.k20cube.show19) {transform: rotateZ(-120deg)}
+
+.obrot2k20:has(.k20cube.show13) {transform: rotateZ(0deg)}
+.obrot2k20:has(.k20cube.show15) {transform: rotateZ(0deg)}
+.obrot2k20:has(.k20cube.show10) {transform: rotateZ(120deg)}
+.obrot2k20:has(.k20cube.show16) {transform: rotateZ(-120deg)}
+.obrot2k20:has(.k20cube.show9) {transform: rotateZ(0deg)}
+
+.obrot2k20:has(.k20cube.show5) {transform: rotateZ(120deg)}
+.obrot2k20:has(.k20cube.show12) {transform: rotateZ(0deg)}
+.obrot2k20:has(.k20cube.show8) {transform: rotateZ(0deg)}
+.obrot2k20:has(.k20cube.show6) {transform: rotateZ(0deg)}
+.obrot2k20:has(.k20cube.show11) {transform: rotateZ(-120deg)}
+
+.obrot2k20:has(.k20cube.show4) {transform: rotateZ(-120deg)}
+.obrot2k20:has(.k20cube.show14) {transform: rotateZ(-120deg)}
+.obrot2k20:has(.k20cube.show20) {transform: rotateZ(0deg)}
+.obrot2k20:has(.k20cube.show2) {transform: rotateZ(120deg)}
+.obrot2k20:has(.k20cube.show18) {transform: rotateZ(120deg)}
+
+
+
+/* transform:  translateY(-17px) translateX(7px); */
+
+.obrot2k20 {
+	position: relative;
+	width: var(--szerokosc20);
+	height: var(--wysokosc20);
+	transform-style: preserve-3d;
+	transition: transform 0.3s ease-in-out;
+	transform-origin: center 95px;
+
+
+	}
