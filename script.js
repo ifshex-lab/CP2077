@@ -205,7 +205,7 @@ class Character {
 	}
 }
 
-function kreatorStart() {
+window.kreatorStart = function kreatorStart() {
 	const mainMenu = document.getElementById("mainMenu")
 	const kreator = document.getElementById("kreator")
 
@@ -218,3 +218,72 @@ function kreatorStart() {
 
 
 }
+let rodzajRzutow = 0;
+import { rzut } from "./kosci.js";
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+window.wyborRzutow = function wyborRzutow(el) {
+	rodzajRzutow = el.id === "reka" ? 1 : 0;
+
+	el.classList.add("wybrany");
+	el.querySelector("span").classList.remove("opacity0");
+
+	const el2 = el.previousElementSibling || el.nextElementSibling;
+
+	if (el2) {
+		el2.classList.remove("wybrany");
+		el2.querySelector("span")?.classList.add("opacity0");
+	}
+
+	console.log(rodzajRzutow);
+};
+
+window.navStage = function navStage(rodzaj) {
+	const przerzut = document.getElementById("przerzut");
+	const stages = [...przerzut.querySelectorAll(":scope > .stage")];
+
+	let indexAktywny = stages.findIndex(el => el.classList.contains("aktywny"));
+
+	if (indexAktywny === -1) {
+		indexAktywny = 0;
+	}
+
+	let nowyIndex = indexAktywny;
+
+	switch (rodzaj) {
+		case "back":
+			nowyIndex = Math.max(0, indexAktywny - 1);
+			break;
+		case "next":
+			nowyIndex = Math.min(stages.length - 1, indexAktywny + 1);
+			break;
+		default:
+			return;
+	}
+
+	stages.forEach((stage, i) => {
+		stage.classList.remove("aktywny", "nastepny", "poprzedni", "hidden");
+
+		if (i < nowyIndex - 1 || i > nowyIndex + 1) {
+			stage.classList.add("hidden");
+		} else if (i === nowyIndex) {
+			stage.classList.add("aktywny");
+		} else if (i === nowyIndex - 1) {
+			stage.classList.add("poprzedni");
+		} else if (i === nowyIndex + 1) {
+			stage.classList.add("nastepny");
+		}
+	});
+}
+
+
+
+async function Debug() {
+    await sleep(1000);
+    await kreatorStart();
+}
+
+// Debug();

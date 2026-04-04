@@ -2,15 +2,9 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
-async function rzut(kosc) {
+export async function rzut(kosc) {
     let cialoKosci = "";
     let wynik = null;
 
@@ -293,7 +287,7 @@ async function rzut(kosc) {
     tlo.remove(); 
     return wynik;
 }
-
+window.rzut = rzut;
 
 // rzut("k20").then((wynik) => {
 //     console.log(wynik);

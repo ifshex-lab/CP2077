@@ -33,10 +33,10 @@
     </div>
   </div>
 
-  <div class="okno menuGlowne hidden">
+  <div id="mainMenu" class="okno menuGlowne hidden">
     <div class="LOGO">CYBERPUNK</div>
     <div id="whoLogged"><span id="displaynickname"></span></div>
-    <button class="mainMenu">KREATOR</button>
+    <button class="mainMenu" onclick="kreatorStart()">KREATOR</button>
     <button class="mainMenu" onclick="rzut('k4')">test K4</button>
     <button class="mainMenu" onclick="rzut('k6')">test K6</button>
     <button class="mainMenu" onclick="rzut('k10')">test K10</button>
@@ -44,12 +44,51 @@
     <button class="mainMenu" id="btnFullscreen">fullscreen</button>
     <button class="mainMenu loggout">Wyloguj</button>
   </div>
+  <div class="kreator schowany" id="kreator">
+    <div class="przerzut" id="przerzut">
+      <div class="stage aktywny" data-number="1" data-opis="rzuty">
+        <h1>masz przy sobie kości?</h1>
+        <h2>USTAWIENIE MOŻESZ ZMIANIĆ W KAŻDEJ CHWILI</h2>
+        <div class="stageBody">
+          <button class="kosci-maszyna" id="maszyna" onclick="wyborRzutow(this)">NIE<span class="opacity0">NIECH APLIKACJA RZUCA ZA MNIE</span></button>
+          <button class="kosci-reka" id="reka" onclick="wyborRzutow(this)">TAK<span class="opacity0">BĘDĘ RZUCAŁ SAM I ZAPISYWAŁ WYNIKI (POTRZEBNE K4, K6, K10 I K20)</span></button>
+        </div>
+      </div>
+      <div class="stage test nastepny" data-number="2" data-opis="klasa">
+        
+      </div>
+      <div class="stage hidden" data-number="3" data-opis="klasa">
+        
+      </div>
+      <div class="stage hidden" data-number="4" data-opis="klasa">
+        
+      </div>
+      <div class="stage hidden" data-number="5" data-opis="klasa">
+        
+      </div>
+      <div class="stage hidden" data-number="6" data-opis="klasa">
+        
+      </div>
+      <div class="stage hidden" data-number="7" data-opis="klasa">
+        
+      </div>
+      <div class="stage hidden" data-number="8" data-opis="klasa">
+        
+      </div>
+    </div>
+    <div id="navpanel">
+      <button class="navbutton big" id="nav_back" onclick="navStage('back')">&#xF3A0</button>
+      <button class="navbutton" id="nav_setting">&#xF1C6</button>
+      <button class="navbutton" id="nav_kosci">&#xF292 &#xF1DE</button>
+      <button class="navbutton big" id="nav_for" onclick="navStage('next')">&#xF39F</button>
+    </div>
+  </div>
   </main>
   <div id="LoadingScreen" class="hidden"><div class="loader"></div></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
-  <script src="script.js"></script>
-  <script src="kosci.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="kosci.js"></script>
 </body>
 </html>
