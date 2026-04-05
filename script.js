@@ -287,7 +287,13 @@ window.navStage = function navStage(rodzaj) {
 			nowyIndex = Math.max(0, indexAktywny - 1);
 			break;
 		case "next":
+			if(document.getElementById("nav_for").classList.contains("stop")) {
+				alert("wypełnij wszystko");
+				return;
+
+			}
 			nowyIndex = Math.min(stages.length - 1, indexAktywny + 1);
+				document.getElementById("nav_for").classList.add("stop");
 			break;
 		default:
 			return;
