@@ -373,9 +373,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await startApp();
 });
-document.getElementById("btnFullscreen").addEventListener("click", async () => {
+const btn = document.getElementById("btnFullscreen");
+
+btn.addEventListener("click", async () => {
   const el = document.documentElement;
-  if (el.requestFullscreen) {
-    await el.requestFullscreen();
+
+  try {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+      return;
+    }
+
+    if (document.fullscreenEnabled && el.requestFullscreen) {
+      await el.requestFullscreen();
+      return;
+    }
+
+    document.body.classList.add("ios-fullscreen-fallback");
+  } catch (err) {
+    console.error("Fullscreen error:", err);
+    document.body.classList.add("ios-fullscreen-fallback");
   }
 });
