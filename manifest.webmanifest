@@ -1,8 +1,8 @@
 {
-  "name": "Moja Aplikacja",
-  "short_name": "MojaApp",
-  "display": "standalone",
+  "name": "CYBERPUNK 2077 BY IFS",
+  "short_name": "CP2077",
   "start_url": "/",
+  "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
