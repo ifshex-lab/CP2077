@@ -422,6 +422,10 @@ label.login {
       flex: 1.5;
       font-size:50px;
     }
+    &.stop {
+      color:grey;
+      border-color:grey;
+    }
   }
 
 }
