@@ -429,3 +429,12 @@ label.login {
   }
 
 }
+.ios-fullscreen-fallback {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  overflow: auto;
+  z-index: 9999;
+  background: black;
+}
