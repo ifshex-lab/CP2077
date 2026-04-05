@@ -7,6 +7,7 @@ class Character {
 		umiejetnosc_specjalna = null,
 		umiejetnosc_specjalna_wartosc = null,
 		czlowieczenstwo = 20,
+		lastStage = 0,
 		cechy =[
 			  { "cecha": "ESTETYKA", "skrot": "EST", "wartosc": 2 },
 			  { "cecha": "INTELIGENCJA", "skrot": "INT", "wartosc": 2 },
@@ -157,7 +158,8 @@ class Character {
 			tulow: 0,
 			nogi:0
 		},
-		pseudonim = ''
+		pseudonim = '',
+		wlasciciel = "",
 
 
 	){
@@ -202,13 +204,36 @@ class Character {
 		this.nazwisko = nazwisko;
 		this.pseudonim = pseudonim;
 		this.czlowieczenstwo = czlowieczenstwo;
+		this.wlasciciel = wlasciciel;
+		this.lastStage = lastStage;
 	}
+}
+
+function zapiszBuildDoLocalStorage(build, klucz = "build") {
+	localStorage.setItem(klucz, JSON.stringify(build));
+}
+
+function wczytajBuildZLocalStorage(klucz = "build") {
+	const dane = localStorage.getItem(klucz);
+	if (!dane) return null;
+
+	const parsed = JSON.parse(dane);
+	return Object.assign(new Character(), parsed);
+}
+
+function usunBuildZLocalStorage(klucz = "build") {
+	localStorage.removeItem(klucz);
 }
 
 window.kreatorStart = function kreatorStart() {
 	const mainMenu = document.getElementById("mainMenu")
 	const kreator = document.getElementById("kreator")
-
+	if (localStorage.getItem("build")) {
+		console.log("jest build");
+	}
+	window.build = new Character();
+	Character.lastStage = 1;
+	console.log(build);
 
 
 
@@ -218,6 +243,8 @@ window.kreatorStart = function kreatorStart() {
 
 
 }
+
+
 let rodzajRzutow = 0;
 import { rzut } from "./kosci.js";
 
@@ -227,6 +254,8 @@ function sleep(ms) {
 
 window.wyborRzutow = function wyborRzutow(el) {
 	rodzajRzutow = el.id === "reka" ? 1 : 0;
+	build.rzuty = el.id;
+	console.log(build);
 
 	el.classList.add("wybrany");
 	el.querySelector("span").classList.remove("opacity0");
@@ -277,6 +306,10 @@ window.navStage = function navStage(rodzaj) {
 			stage.classList.add("nastepny");
 		}
 	});
+	build.lastStage = document.querySelector(".stage.aktywny").dataset.number;
+	console.log("last Stage: " + build.lastStage);
+	zapiszBuildDoLocalStorage(build);
+
 }
 
 
@@ -287,3 +320,8 @@ async function Debug() {
 }
 
 // Debug();
+
+
+window.alertWindow = function alertWindow() {
+	
+}
