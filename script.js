@@ -330,7 +330,7 @@ async function Debug() {
 	navStage("next");
 }
 
-Debug();
+// Debug();
 
 // import { listaKlasyPostaci } from "./app.js";
 async function budujStrone() {
