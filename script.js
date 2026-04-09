@@ -288,6 +288,7 @@ window.navStage = function navStage(rodzaj) {
 	switch (rodzaj) {
 		case "back":
 			nowyIndex = Math.max(0, indexAktywny - 1);
+			moznaDalej();
 			break;
 		case "next":
 			if(document.getElementById("nav_for").classList.contains("stop")) {
