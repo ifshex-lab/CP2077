@@ -256,6 +256,7 @@ window.wyborRzutow = function wyborRzutow(el) {
 	rodzajRzutow = el.id === "reka" ? 1 : 0;
 	build.rzuty = el.id;
 	console.log(build);
+	moznaDalej();
 
 	el.classList.add("wybrany");
 	el.querySelector("span").classList.remove("opacity0");
@@ -269,7 +270,9 @@ window.wyborRzutow = function wyborRzutow(el) {
 
 	console.log(rodzajRzutow);
 };
-
+function moznaDalej() {
+	document.getElementById("nav_for").classList.remove("stop");
+}
 window.navStage = function navStage(rodzaj) {
 	const przerzut = document.getElementById("przerzut");
 	const stages = [...przerzut.querySelectorAll(":scope > .stage")];
@@ -323,11 +326,58 @@ window.navStage = function navStage(rodzaj) {
 async function Debug() {
     await sleep(1000);
     await kreatorStart();
+	wyborRzutow(document.getElementById("maszyna"));
+	navStage("next");
 }
 
-// Debug();
+Debug();
 
+// import { listaKlasyPostaci } from "./app.js";
+async function budujStrone() {
+  let listaKlas = await window.KlasyPostaciPromise;
 
-window.alertWindow = function alertWindow() {
-	
+  function stage2() {
+    console.log("stage2", listaKlas);
+	const selectKlasy = document.getElementById("wyborKlasy");
+	listaKlas.forEach((klasa) => {
+		const opcja = document.createElement("option");
+		opcja.innerHTML=klasa.klasa + " " + klasa.podklasa;
+		opcja.value=klasa.id;
+		selectKlasy.appendChild(opcja);
+	});
+	document.getElementById("wyborKlasy").addEventListener("change", function () {
+		const wybranaKlasa = listaKlas.find(element => String(element.id) === this.value);
+		build.klasa=wybranaKlasa?.klasa;
+		build.podklasa=wybranaKlasa?.podklasa;
+	});
+  }
+
+  function stage3() {
+  }
+
+  function stage4() {
+    
+  }
+
+  function stage5() {
+    
+  }
+
+  function stage6() {
+    
+  }
+
+  function stage7() {
+    
+  }
+
+  stage2();
+  stage3();
+  stage4();
+  stage5();
+  stage6();
+  stage7();
 }
+
+document.addEventListener("DOMContentLoaded", budujStrone);
+

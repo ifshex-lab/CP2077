@@ -65,7 +65,13 @@
       </div>
       <div class="stage nastepny" data-number="2" data-opis="rola postaci">
         <h1>rola postaci</h1>
-        
+          <div class="stageBody">
+          <label for="wyborKlasy">Wybierz klasę</label>
+          <div class="selectWrapper">
+            <select id="wyborKlasy" name="lol">
+            </select>
+          </div>
+        </div>
       </div>
       <div class="stage hidden" data-number="3" data-opis="cechy postaci">
         <h1>cechy postaci</h1>
@@ -129,7 +135,7 @@
   <div id="LoadingScreen" class="hidden"><div class="loader"></div></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
   <script type="module" src="script.js"></script>
   <script type="module" src="kosci.js"></script>
 </body>

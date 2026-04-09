@@ -136,10 +136,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
-      const { data, error } = await sb.auth.signUp({
-        email,
-        password
-      });
+      const { data, error } = await sb.auth.signUp({ email, password });
 
       if (error) {
         alert(error.message);
@@ -181,10 +178,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
-      const { data, error } = await sb.auth.signInWithPassword({
-        email,
-        password
-      });
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
 
       if (error) {
         alert(error.message);
@@ -297,36 +291,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  btnLogin.addEventListener("click", async () => {
-    if (authMode === "login") {
-      await zaloguj();
-    } else {
-      await zarejestruj();
-    }
-  });
-
-  btnRegister.addEventListener("click", () => {
-    if (authBusy) return;
-
-    if (authMode === "login") {
-      ustawTrybRejestracji();
-    } else {
-      ustawTrybLogowania();
-    }
-  });
-
-  logoutButtons.forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      await wyloguj();
-    });
-  });
-
-  rememberCheckbox.addEventListener("change", () => {
-    if (!rememberCheckbox.checked) {
-      wyczyscRemember();
-    }
-  });
-
   async function startApp() {
     pokazLoading();
 
@@ -368,11 +332,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  window.KlasyPostaci = await pobierzKlasyPostaci();
-  // console.log(window.KlasyPostaci);
+  window.KlasyPostaciPromise = pobierzKlasyPostaci();
+  window.KlasyPostaci = await window.KlasyPostaciPromise;
 
   await startApp();
 });
+
+// window.listaKlasyPostaci = window.KlasyPostaci;
 const btn = document.getElementById("btnFullscreen");
 
 btn.addEventListener("click", async () => {
@@ -395,3 +361,4 @@ btn.addEventListener("click", async () => {
     document.body.classList.add("ios-fullscreen-fallback");
   }
 });
+
