@@ -346,8 +346,17 @@ async function budujStrone() {
 		opcja.value=klasa.id;
 		selectKlasy.appendChild(opcja);
 	});
+	const opcja = document.createElement("option");
+	opcja.innerHTML="LOSUJ (JESZCZE NIE LOSUJE)";
+	opcja.value="losuj";
+	selectKlasy.appendChild(opcja);
 	document.getElementById("wyborKlasy").addEventListener("change", function () {
-		const wybranaKlasa = listaKlas.find(element => String(element.id) === this.value);
+		let wybranaKlasa;
+		if (this.value === "losuj"){
+			wybranaKlasa = listaKlas.find(element => String(element.id) === "FF");
+		} else {
+			wybranaKlasa = listaKlas.find(element => String(element.id) === this.value);
+		}
 		build.klasa=wybranaKlasa?.klasa;
 		build.podklasa=wybranaKlasa?.podklasa;
 		moznaDalej();
