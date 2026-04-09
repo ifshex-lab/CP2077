@@ -349,6 +349,7 @@ async function budujStrone() {
 		const wybranaKlasa = listaKlas.find(element => String(element.id) === this.value);
 		build.klasa=wybranaKlasa?.klasa;
 		build.podklasa=wybranaKlasa?.podklasa;
+		moznaDalej();
 	});
   }
 

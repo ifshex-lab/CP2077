@@ -198,6 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ukryjLoading();
     }
   }
+  document.getElementById("logowanie").addEventListener("click", zaloguj);
 
   async function wyloguj() {
     if (authBusy) return;
@@ -217,6 +218,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ukryjLoading();
     }
   }
+  document.getElementById("btnlogout").addEventListener("click", wyloguj);
 
   async function pobierzKlasyPostaci() {
     const { data, error } = await sb
