@@ -408,6 +408,11 @@ label.login {
           background:var(--tło);
         }
       }
+      .oknoZtekstem {
+        width:95%;
+        min-height:100px;
+        border: 2px double var(--akcenty);
+      }
       &:has(.kosci-reka:hover) .kosci-maszyna,
       &:has(.kosci-reka:active) .kosci-maszyna,
       &:has(.kosci-maszyna:hover) .kosci-reka,
@@ -517,3 +522,4 @@ body {
 #app {
   min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 }
+
