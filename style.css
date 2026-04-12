@@ -410,7 +410,7 @@ label.login {
       }
       .oknoZtekstem {
         width:95%;
-        min-height:100px;
+        min-height:400px;
         border: 4px double var(--akcenty);
         border-radius:5px;
         margin-top:15px;
