@@ -331,7 +331,7 @@ async function Debug() {
 	navStage("next");
 }
 
-Debug();
+// Debug();
 
 // import { listaKlasyPostaci } from "./app.js";
 async function budujStrone() {
@@ -364,7 +364,7 @@ async function budujStrone() {
 		kontenerOpis.innerHTML = `
 			<h1>${wybranaKlasa?.klasa ?? ""} ${wybranaKlasa?.podklasa ?? ""}</h1>
 			<h2> TYP KLASY </h2>
-			<p>1</p>
+			<p></p>
 			<h2> NAJWAŻNIEJSZE CECHY </h2>
 			<p>2</p>
 			<h2> UMIEJĘTNOŚĆ SPECJALNA </h2>
