@@ -363,6 +363,17 @@ async function budujStrone() {
 		const kontenerOpis = document.getElementById("opis_klasy");
 		kontenerOpis.innerHTML = `
 			<h1>${wybranaKlasa?.klasa ?? ""} ${wybranaKlasa?.podklasa ?? ""}</h1>
+			<h2> TYP KLASY </h2>
+			<p>1</p>
+			<h2> NAJWAŻNIEJSZE CECHY </h2>
+			<p>2</p>
+			<h2> UMIEJĘTNOŚĆ SPECJALNA </h2>
+			<p>3</p>
+			<h2> UMIEJĘTNOŚCI KLASY </h2>
+			<p>4</p>
+			<h2> UMIEJĘTNOŚCI PODKLASY </h2>
+			<p>5</p>
+
 		`;
 
 		moznaDalej();
