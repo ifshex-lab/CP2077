@@ -362,7 +362,7 @@ async function budujStrone() {
 		build.podklasa=wybranaKlasa?.podklasa;
 		const kontenerOpis = document.getElementById("opis_klasy");
 		kontenerOpis.innerHTML = `
-		<h1>${wybranaKlasa?.klasa} ${wybranaKlasa?.podklasa}</h1>
+			<h1>${wybranaKlasa?.klasa ?? ""} ${wybranaKlasa?.podklasa ?? ""}</h1>
 		`;
 
 		moznaDalej();
