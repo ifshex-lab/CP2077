@@ -331,7 +331,7 @@ async function Debug() {
 	navStage("next");
 }
 
-// Debug();
+Debug();
 
 // import { listaKlasyPostaci } from "./app.js";
 async function budujStrone() {
@@ -347,7 +347,7 @@ async function budujStrone() {
 		selectKlasy.appendChild(opcja);
 	});
 	const opcja = document.createElement("option");
-	opcja.innerHTML="LOSUJ (JESZCZE NIE LOSUJE)";
+	opcja.innerHTML="LOSUJ";
 	opcja.value="losuj";
 	selectKlasy.appendChild(opcja);
 	document.getElementById("wyborKlasy").addEventListener("change", function () {
