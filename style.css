@@ -413,7 +413,7 @@ label.login {
         min-height:400px;
         border: 4px double var(--akcenty);
         border-radius:5px;
-        margin-top:15px;
+        margin-top:20px;
         box-shadow: 0px 0px 10px 0px var(--akcenty);
 
       }
