@@ -353,7 +353,8 @@ async function budujStrone() {
 	document.getElementById("wyborKlasy").addEventListener("change", function () {
 		let wybranaKlasa;
 		if (this.value === "losuj"){
-			wybranaKlasa = listaKlas.find(element => String(element.id) === "FF");
+			let liczba = Math.floor(Math.random() * 23);
+			wybranaKlasa = listaKlas[liczba];
 		} else {
 			wybranaKlasa = listaKlas.find(element => String(element.id) === this.value);
 		}
