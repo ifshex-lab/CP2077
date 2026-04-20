@@ -420,7 +420,7 @@ label.login {
         margin-top:20px;
         transition:all 3s ease;
         box-shadow: 0px 0px 10px 0px var(--akcenty);
-        padding-bottom:5px;
+        padding-bottom:20px;
         overflow:hidden;
         h2 {
           margin-bottom:0;
