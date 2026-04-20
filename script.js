@@ -329,6 +329,10 @@ async function Debug() {
     await kreatorStart();
 	wyborRzutow(document.getElementById("maszyna"));
 	navStage("next");
+	const select = document.getElementById("wyborKlasy");
+	await sleep(1000);
+	select.value = "CP";
+	select.dispatchEvent(new Event("change", { bubbles: true }));
 }
 
 // Debug();
@@ -336,6 +340,7 @@ async function Debug() {
 // import { listaKlasyPostaci } from "./app.js";
 async function budujStrone() {
   let listaKlas = await window.KlasyPostaciPromise;
+  let listaUm = await window.listaUmiejetnosciPromise;
 
   function stage2() {
     console.log("stage2", listaKlas);
@@ -363,18 +368,26 @@ async function budujStrone() {
 		const kontenerOpis = document.getElementById("opis_klasy");
 		kontenerOpis.innerHTML = `
 			<h1>${wybranaKlasa?.klasa ?? ""} ${wybranaKlasa?.podklasa ?? ""}</h1>
+			<p>${wybranaKlasa?.opis}</p>
+
 			<h2> TYP KLASY </h2>
-			<p></p>
+			<p>${wybranaKlasa?.typKlasy}</p>
+
 			<h2> NAJWAŻNIEJSZE CECHY </h2>
-			<p>2</p>
-			<h2> UMIEJĘTNOŚĆ SPECJALNA </h2>
-			<p>3</p>
+			<p>${wybranaKlasa?.najwazniejszeCechy.join("<br>")}</p>
+
+			<h2> UMIEJĘTNOŚĆ SPECJALNA: ${wybranaKlasa?.umiejetnoscSpecjalna}</h2>
+			<p>${wybranaKlasa?.umiejetnoscSpecjalna}<br>${listaUm.find(u => u.nazwa === wybranaKlasa?.umiejetnoscSpecjalna).opis}</p>
+			
 			<h2> UMIEJĘTNOŚCI KLASY </h2>
-			<p>4</p>
+			<p>${wybranaKlasa?.umiejetnosciKlasowe.join("<br>")}</p>
+
 			<h2> UMIEJĘTNOŚCI PODKLASY </h2>
-			<p>5</p>
+			<p>${wybranaKlasa?.umiejetnosciPodklasy.join("<br>")}</p>
 
 		`;
+		sleep(100);
+		kontenerOpis.classList.remove("niski");
 
 		moznaDalej();
 	});

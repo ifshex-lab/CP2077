@@ -1,7 +1,7 @@
 :root {
   --przewodni: black;
   --akcenty:  #d600ff;
-  --cakcenty: black;
+  --cakcenty: #220029;
   --tło: black;
   --black: #000000;
   --black-rgb: 0, 0, 0;
@@ -408,13 +408,43 @@ label.login {
           background:var(--tło);
         }
       }
+
       .oknoZtekstem {
+        
         width:calc(100% - 40px);
-        min-height:400px;
+        min-height: 400px;
+        max-height: 2000px;
         border: 4px double var(--akcenty);
         border-radius:15px;
+        /* opacity:1; */
         margin-top:20px;
+        transition:all 3s ease;
         box-shadow: 0px 0px 10px 0px var(--akcenty);
+        padding-bottom:5px;
+        overflow:hidden;
+        h2 {
+          margin-bottom:0;
+        }
+        P {
+          color: var(--akcenty);
+          justify-content: center;
+          text-align: center;
+          display:block;
+          background:var(--cakcenty);
+          margin:0;
+          margin-left:20px;
+          margin-right:20px;
+          margin-top:4px;
+          border-radius:15px;
+          padding:4px;
+        }
+        &.niski {
+          min-height: 0;
+          max-height: 0;
+          /* opacity: 0; */
+          padding-bottom: 0;
+          border:unset;
+        }
 
       }
       &:has(.kosci-reka:hover) .kosci-maszyna,

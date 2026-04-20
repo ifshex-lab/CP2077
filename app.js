@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ukryjLoading();
     }
   }
-
+document.getElementById("rejestracja").addEventListener("click", zarejestruj);
   async function zaloguj() {
     if (authBusy) return;
     authBusy = true;
@@ -219,7 +219,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
   document.getElementById("btnlogout").addEventListener("click", wyloguj);
+  async function pobierzUmiejetnosci() {
+  const { data, error } = await sb
+    .from("umiejetnosci")
+    .select("*")
+    .order("kategoria", { ascending: true })
+    .order("nazwa", { ascending: true });
 
+  if (error) {
+    console.error("Błąd pobierania umiejetnosci:", error);
+    return [];
+  }
+
+  function oczyscWartosc(wartosc) {
+    if (wartosc == null) return "";
+    if (typeof wartosc !== "string") return wartosc;
+    return wartosc.trim();
+  }
+
+  function pobierzPole(obiekt, ...klucze) {
+    for (const klucz of klucze) {
+      if (obiekt?.[klucz] !== undefined && obiekt?.[klucz] !== null) {
+        return oczyscWartosc(obiekt[klucz]);
+      }
+    }
+    return "";
+  }
+
+  return (data || []).map(wiersz => ({
+    kategoria: pobierzPole(wiersz, "kategoria", "KATEGORIA"),
+    nazwa: pobierzPole(wiersz, "nazwa", "NAZWA"),
+    opis: pobierzPole(wiersz, "opis", "OPIS"),
+    typ: pobierzPole(wiersz, "typ", "TYP"),
+    wzor: pobierzPole(wiersz, "wzor", "WZÓR"),
+    porazka: pobierzPole(wiersz, "porazka", "PORAŻKA"),
+    prog_1: pobierzPole(wiersz, "prog_1", "PRÓG_1"),
+    prog_2: pobierzPole(wiersz, "prog_2", "PRÓG_2"),
+    prog_3: pobierzPole(wiersz, "prog_3", "PRÓG_3"),
+    prog_4: pobierzPole(wiersz, "prog_4", "PRÓG_4"),
+    sukces: pobierzPole(wiersz, "sukces", "SUKCES")
+  }));
+}
   async function pobierzKlasyPostaci() {
     const { data, error } = await sb
       .from("KLASY_POSTACI")
@@ -336,6 +376,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   window.KlasyPostaciPromise = pobierzKlasyPostaci();
   window.KlasyPostaci = await window.KlasyPostaciPromise;
+  window.listaUmiejetnosciPromise = pobierzUmiejetnosci();
+  window.listaUmiejetnosci = await window.listaUmiejetnosciPromise;
+  // console.log(window.listaUmiejetnosci);
+
 
   await startApp();
 });
